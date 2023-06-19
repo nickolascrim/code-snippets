@@ -1,0 +1,38 @@
+
+<!-- It will start auto-playing the slide when enter 100px in viewport from top…
+Also do not make slider Auto-Play in Webflow. --> 
+
+<script>
+function play_slide(){
+      	var tabTimeout;
+      	clearTimeout(tabTimeout);
+      	tabLoop();
+
+    		// define loop - cycle through all tabs
+   			function tabLoop() {
+        		tabTimeout = setTimeout(function() {
+               	$('.w-slider-arrow-right').click()  // click resets timeout, so no need for interval
+         		}, 3000);  // 5 second tab loop
+   			 }
+
+    			// reset timeout if a tab is clicked
+    			$('.w-slider-arrow-right').click(function() {
+        			clearTimeout(tabTimeout);
+        			tabLoop();
+        	});
+    	}
+    
+    
+    	let observer = new IntersectionObserver((entries, observer) => { 
+    			entries.forEach(entry => {
+    						if(entry.isIntersecting){
+    										play_slide()
+            						observer.unobserve(entry.target);
+    						}
+    			});
+  		}, {rootMargin: "0px 0px -100px 0px"}); 
+
+  		let target = $('.w-slider')[0]
+  		observer.observe(target)
+      
+</script> 
