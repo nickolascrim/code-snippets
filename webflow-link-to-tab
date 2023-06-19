@@ -1,0 +1,22 @@
+
+<!-- Link to specific tab https://www.youtube.com/watch?v=4bGKzw649o0&t=31s --> 
+
+
+<script>
+
+var Webflow = Webflow || [];
+Webflow.push(function () {
+  var tabName = getParam('tab');
+  if (!tabName) return;
+
+  $('.' + tabName).triggerHandler('click');
+
+  function getParam(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+      results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  }
+});
+
+</script>
